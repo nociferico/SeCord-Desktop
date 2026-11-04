@@ -26,6 +26,8 @@ No Windows, abra **Clipes de áudio** nas configurações, no menu da bandeja ou
 
 FakeNitro pode enviar emojis e figurinhas como links ou imagens quando o canal permitir; não concede Nitro. Cosméticos locais podem aparecer apenas para você ou para outros usuários da mesma extensão. Captura de tela e sons de outros servidores dependem das permissões do sistema e do Discord. Se alguém aplicar server deaf ou restringir o soundboard, o SeCord não remove essa permissão.
 
+**Go Live no Brasil:** o Discord informa que suspendeu a transmissão de tela e o vídeo em tempo real para usuários no Brasil por determinação da ANPD. A restrição também afeta quem usa o SeCord, pois ele se conecta ao serviço do Discord. Uma atualização do SeCord, qualidade de captura ou permissão local não reativa o Go Live nativo. Consulte o [aviso oficial do Discord](https://support.discord.com/hc/pt-br/articles/42704051358359-Por-que-os-recursos-de-v%C3%ADdeo-est%C3%A3o-indispon%C3%ADveis-no-Brasil-no-momento).
+
 ## Compilar
 
 Requer Node.js 22+ e pnpm. Clone o [cliente SeCord](https://github.com/nociferico/SeCord-Client) como `NociCord`, ao lado deste projeto.
