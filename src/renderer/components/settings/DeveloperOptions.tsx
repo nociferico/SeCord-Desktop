@@ -4,90 +4,25 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Button, Heading, Paragraph, TextButton } from "@vencord/types/components";
-import { Margins, promptToRestart, useForceUpdater } from "@vencord/types/utils";
-import { Modal, openModal, showToast } from "@vencord/types/webpack/common";
-import { Settings } from "shared/settings";
+import { Button, Heading } from "@vencord/types/components";
+import { Modal, openModal } from "@vencord/types/webpack/common";
 
 import { cl, SettingsComponent } from "./Settings";
 
-export const DeveloperOptionsButton: SettingsComponent = ({ settings }) => {
-    return <Button onClick={() => openDeveloperOptionsModal(settings)}>Open Developer Settings</Button>;
+export const DeveloperOptionsButton: SettingsComponent = () => {
+    return <Button onClick={openDeveloperOptionsModal}>Opções de desenvolvimento</Button>;
 };
 
-function openDeveloperOptionsModal(settings: Settings) {
+function openDeveloperOptionsModal() {
     openModal(props => (
-        <Modal {...props} size="lg" title="Vesktop Developer Options">
-            <Heading tag="h4">Vencord Location</Heading>
-            <VencordLocationPicker settings={settings} />
-
-            <Heading tag="h4" className={Margins.top16}>
-                Debugging
-            </Heading>
+        <Modal {...props} size="lg" title="SeCord: desenvolvimento">
+            <Heading tag="h4">Diagnóstico</Heading>
             <div className={cl("button-grid")}>
-                <Button onClick={() => VesktopNative.debug.launchGpu()}>Open chrome://gpu</Button>
+                <Button onClick={() => VesktopNative.debug.launchGpu()}>Abrir chrome://gpu</Button>
                 <Button onClick={() => VesktopNative.debug.launchWebrtcInternals()}>
-                    Open chrome://webrtc-internals
+                    Abrir chrome://webrtc-internals
                 </Button>
             </div>
         </Modal>
     ));
 }
-
-const VencordLocationPicker: SettingsComponent = () => {
-    const forceUpdate = useForceUpdater();
-    const usingCustomVencordDir = VesktopNative.fileManager.isUsingCustomVencordDir();
-
-    return (
-        <>
-            <Paragraph>
-                Vencord files are loaded from{" "}
-                {usingCustomVencordDir ? (
-                    <TextButton
-                        variant="link"
-                        onClick={e => {
-                            e.preventDefault();
-                            VesktopNative.fileManager.showCustomVencordDir();
-                        }}
-                    >
-                        a custom location
-                    </TextButton>
-                ) : (
-                    "the default location"
-                )}
-            </Paragraph>
-            <div className={cl("button-grid")}>
-                <Button
-                    onClick={async () => {
-                        const choice = await VesktopNative.fileManager.selectVencordDir();
-                        switch (choice) {
-                            case "cancelled":
-                                break;
-                            case "ok":
-                                promptToRestart("relaunch");
-                                break;
-                            case "invalid":
-                                showToast({
-                                    text: "You did not choose a valid Vencord install. Make sure you're selecting the dist dir!",
-                                    variant: "critical"
-                                });
-                                break;
-                        }
-                        forceUpdate();
-                    }}
-                >
-                    Change
-                </Button>
-                <Button
-                    variant="dangerPrimary"
-                    onClick={async () => {
-                        await VesktopNative.fileManager.selectVencordDir(null);
-                        forceUpdate();
-                    }}
-                >
-                    Reset
-                </Button>
-            </div>
-        </>
-    );
-};

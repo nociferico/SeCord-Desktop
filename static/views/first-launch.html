@@ -2,7 +2,7 @@
 <meta charset="utf-8" />
 
 <head>
-    <title>Vesktop Setup</title>
+    <title>Configuração do SeCord</title>
 
     <link rel="stylesheet" href="./common.css" type="text/css" />
 
@@ -109,12 +109,15 @@
 </head>
 
 <body>
-    <h1>Welcome to Vesktop</h1>
-    <p>Let's customise your experience!</p>
+    <div style="display:flex;align-items:center;gap:12px">
+        <img src="vesktop://static/secord-logo.png" alt="" style="width:56px;height:56px;object-fit:contain" />
+        <div><h1>SeCord</h1><div style="opacity:.55;font-size:12px">(SoulEater)</div></div>
+    </div>
+    <p>Este aplicativo é separado do Discord original. Escolha como deseja começar.</p>
 
     <form>
         <label>
-            <h2>Discord Branch</h2>
+            <h2>Versão do Discord</h2>
             <select name="discordBranch">
                 <option value="stable">stable</option>
                 <option value="canary">canary</option>
@@ -124,8 +127,8 @@
 
         <label>
             <div>
-                <h2>Start with System</h2>
-                <span>Automatically open Vesktop when your computer starts</span>
+                <h2>Iniciar com o sistema</h2>
+                <span>Abrir o SeCord quando o computador iniciar</span>
             </div>
             <input type="checkbox" name="autoStart" />
         </label>
@@ -133,30 +136,30 @@
         <label>
             <div>
                 <h2>Rich Presence</h2>
-                <span>Enable Rich presence (game activity)</span>
+                <span>Mostrar atividade de jogos e aplicativos</span>
             </div>
             <input type="checkbox" name="richPresence" checked />
         </label>
 
         <label>
             <div>
-                <h2>Import Settings</h2>
-                <span>Import Settings from existing Vencord install (if found)</span>
+                <h2>Importar ajustes</h2>
+                <span>Copiar ajustes existentes do Vencord, se houver</span>
             </div>
-            <input type="checkbox" name="importSettings" checked />
+            <input type="checkbox" name="importSettings" />
         </label>
 
         <label>
             <div>
-                <h2>Minimise to Tray</h2>
-                <span>Minimise to Tray when closing</span>
+                <h2>Minimizar para a bandeja</h2>
+                <span>Manter o SeCord aberto ao fechar a janela</span>
             </div>
             <input type="checkbox" name="minimizeToTray" checked />
         </label>
     </form>
     <div id="buttons">
-        <button id="cancel">Quit</button>
-        <button id="submit">Submit</button>
+        <button id="cancel">Sair</button>
+        <button id="submit">Começar</button>
     </div>
 </body>
 

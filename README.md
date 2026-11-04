@@ -1,64 +1,42 @@
-# Vesktop
+# SeCord (SoulEater)
 
-Vesktop is a custom Discord desktop app
+SeCord é um aplicativo Windows separado do Discord original. Usa a base aberta do [Vesktop](https://github.com/Vencord/Vesktop) e incorpora o [cliente SeCord](https://github.com/nociferico/SeCord-Client). Tem executável, ícone e dados próprios. Não modifica os arquivos do Discord instalado.
 
-**Main features**:
+## Instalar
 
-- Vencord preinstalled
-- Much more lightweight and faster than the official Discord app
-- Linux Screenshare with sound & wayland
-- Much better privacy, since Discord has no access to your system
+O instalador está disponível na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases), quando publicado. Ao compilar localmente, ele fica em `release/SeCord Setup 0.2.1.exe`. O arquivo `release/win-unpacked/SeCord.exe` é apenas para teste dentro da pasta completa. O instalador local não tem assinatura digital.
 
-**Not yet supported**:
+## Extensões e favoritos
 
-- Global Keybinds
-- see the [Roadmap](https://github.com/Vencord/Vesktop/issues/324)
+A tela **Extensões** está em português. As descrições e opções comuns foram traduzidas; nomes técnicos das extensões permanecem reconhecíveis. A lista mostra primeiro **Favoritas**, depois **Mais úteis para começar** e, abaixo, as demais. Clique na estrela de um cartão para fixar ou desafixar.
 
-![](https://github.com/Vencord/Vesktop/assets/45497981/8608a899-96a9-4027-9725-2cb02ba189fd)
-![](https://github.com/Vencord/Vesktop/assets/45497981/8701e5de-52c4-4346-a990-719cb971642e)
+**MessageLogger** vem ativado por padrão em instalações novas. Ele marca com fundo vermelho mensagens apagadas que o cliente já recebeu e mostra edições. Seu registro é temporário: não recupera mensagens anteriores, nunca carregadas ou de outros dispositivos. Uma preferência anterior do usuário não é sobrescrita.
 
-## Installing
+A seção recomendada é uma seleção editorial, não um ranking de uso medido. A lista inclui MessageLogger, ShowHiddenChannels, FakeNitro, SpotifyControls, BetterGifPicker, BetterFolders, ClearURLs, Translate, FavoriteEmojiFirst, SilentMessageToggle, ReadAllNotificationsButton e VolumeBooster.
 
-Visit https://vesktop.dev/install
+**ShowHiddenChannels** é opcional. Quando ativo, mostra na lista os canais ocultos cujos dados o Discord entregar ao aplicativo. Clicar abre uma prévia local, com metadados disponíveis e sem mensagens, campo de conversa ou entrada em voz. Canais que o servidor não enviar continuam invisíveis. Não concede permissões do servidor.
 
-## Building from Source
+O **SpotifyControls** tem uma bússola acima do player. Ao clicar, abre uma busca compacta com três faixas visíveis e rolagem para carregar mais. A busca usa a conta Spotify conectada ao Discord; o player aparece quando há música e dispositivo ativos. Ao escolher uma faixa, o SeCord tenta reproduzi-la no dispositivo ativo. A reprodução direta pode exigir Spotify Premium; se falhar, a faixa abre no Spotify. Não foi possível testar a busca com uma conta conectada neste ambiente.
 
-You need to have the following dependencies installed:
+## Clipes de áudio
 
-- [Git](https://git-scm.com/downloads)
-- [Node.js](https://nodejs.org/en/download)
-- pnpm: `npm install --global pnpm`
+No Windows, abra **Clipes de áudio** nas configurações, no menu da bandeja ou com `Ctrl+Alt+C`. Clique para iniciar a captura e depois salve os últimos 30, 60 ou 120 segundos em WAV. A função captura o áudio reproduzido pelo computador, não somente a call; não inclui o seu microfone. Nada é salvo até você escolher um arquivo. Avise as outras pessoas antes de gravar. A função foi compilada, mas ainda precisa de um teste real de captura neste computador.
 
-Packaging will create builds in the dist/ folder
+## Recursos e limites
 
-```sh
-git clone https://github.com/Vencord/Vesktop
-cd Vesktop
+FakeNitro pode enviar emojis e figurinhas como links ou imagens quando o canal permitir; não concede Nitro. Cosméticos locais podem aparecer apenas para você ou para outros usuários da mesma extensão. Captura de tela e sons de outros servidores dependem das permissões do sistema e do Discord. Se alguém aplicar server deaf ou restringir o soundboard, o SeCord não remove essa permissão.
 
-# Install Dependencies
-pnpm i
+## Compilar
 
-# Either run it without packaging
-pnpm start
+Requer Node.js 22+ e pnpm. Clone o [cliente SeCord](https://github.com/nociferico/SeCord-Client) como `NociCord`, ao lado deste projeto.
 
-# Or package (will build packages for your OS)
-pnpm package
-
-# Or only build the Linux Pacman package
-pnpm package --linux pacman
-
-# Or package to a directory only
-pnpm package:dir
+```powershell
+pnpm install --frozen-lockfile
+pnpm package:nocicord
 ```
 
-## Building LibVesktop from Source
+O pacote incorpora os arquivos locais do cliente e não os substitui automaticamente pelos da versão original.
 
-This is a small C++ helper library Vesktop uses on Linux to emit D-Bus events. By default, prebuilt binaries for x64 and arm64 are used.
+## Créditos
 
-If you want to build it from source:
-
-1. Install build dependencies:
-    - Debian/Ubuntu: `apt install build-essential python3 curl pkg-config libglib2.0-dev`
-    - Fedora: `dnf install @c-development @development-tools python3 curl pkgconf-pkg-config glib2-devel`
-2. Run `pnpm buildLibVesktop`
-3. From now on, building Vesktop will use your own build
+Base Vesktop 1.6.8, commit `16e0c3744185424356deaedde3b078aff3dbba19`. Cliente Vencord 1.15.16, commit `383409e6a6ec9008ee8a7496500f1e75f17824d1`. Consulte [LICENSE](LICENSE) ao redistribuir. SeCord não é afiliado ao Discord, Vencord ou Vesktop.

@@ -1,15 +1,17 @@
 {
-    "name": "vesktop",
-    "version": "1.6.8",
+    "name": "secord-desktop",
+    "version": "0.2.1",
     "private": true,
-    "description": "Vesktop is a custom Discord desktop app",
+    "description": "SeCord (SoulEater), a separate Discord desktop app with a custom client",
     "keywords": [],
-    "homepage": "https://vencord.dev/",
+    "homepage": "https://github.com/Vencord/Vesktop",
     "license": "GPL-3.0-or-later",
     "author": "Vendicated <vendicated@riseup.net>",
     "main": "dist/js/main.js",
     "scripts": {
-        "build": "tsx scripts/build/build.mts",
+        "build": "node scripts/build/copyNociCord.mjs && tsx scripts/build/build.mts",
+        "build:nocicord": "pnpm -C ../NociCord build:nocicord && pnpm build",
+        "package:nocicord": "pnpm build:nocicord && electron-builder --win nsis --x64 --config.directories.output=release",
         "build:dev": "pnpm build --dev",
         "buildLibVesktop": "pnpm -C packages/libvesktop install && pnpm -C packages/libvesktop run build",
         "package": "pnpm build && electron-builder",
@@ -57,9 +59,9 @@
         "pnpm": ">=11"
     },
     "build": {
-        "appId": "dev.vencord.vesktop",
-        "productName": "Vesktop",
-        "executableName": "vesktop",
+        "appId": "app.secord.desktop",
+        "productName": "SeCord",
+        "executableName": "SeCord",
         "files": [
             "!*",
             "!node_modules",
@@ -68,12 +70,6 @@
             "package.json",
             "LICENSE"
         ],
-        "protocols": {
-            "name": "Discord",
-            "schemes": [
-                "discord"
-            ]
-        },
         "beforePack": "scripts/build/beforePack.mjs",
         "afterPack": "scripts/build/afterPack.mjs",
         "toolsets": {
@@ -115,13 +111,12 @@
             ],
             "desktop": {
                 "entry": {
-                    "Name": "Vesktop",
+                    "Name": "SeCord",
                     "GenericName": "Internet Messenger",
                     "Type": "Application",
                     "Categories": "Network;InstantMessaging;Chat;",
-                    "Keywords": "discord;vencord;electron;chat;",
-                    "MimeType": "x-scheme-handler/discord",
-                    "StartupWMClass": "vesktop"
+                    "Keywords": "discord;nocicord;electron;chat;",
+                    "StartupWMClass": "secord"
                 }
             }
         },
@@ -168,11 +163,10 @@
             ]
         },
         "nsis": {
-            "include": "build/installer.nsh",
             "oneClick": false
         },
         "win": {
-            "icon": "build/icon.ico",
+            "icon": "build/secord.ico",
             "target": [
                 {
                     "target": "nsis",
@@ -189,9 +183,6 @@
                     ]
                 }
             ]
-        },
-        "publish": {
-            "provider": "github"
         },
         "rpm": {
             "fpm": [

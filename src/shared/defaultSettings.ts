@@ -11,7 +11,7 @@ export const DefaultVesktopSettings: Settings = {
     hardwareAcceleration: true,
     hardwareVideoAcceleration: false,
     nativeTitleBar: false,
-    staticTitle: false,
+    staticTitle: true,
     enableMenu: false,
     enableShadow: true,
     enableRoundedCorners: true,

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' vesktop:; script-src 'self'; style-src 'self';" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SeCord — clipes de áudio</title>
+<link rel="stylesheet" href="clips.css" />
+<script src="clips.js" defer></script>
+</head>
+<body>
+<main>
+<header>
+<img src="../secord-logo.png" alt="" />
+<div><h1>Clipes de áudio</h1><p class="sub">SeCord <span>(SoulEater)</span></p></div>
+</header>
+<p class="intro">Guarde um momento da call sem gravar o tempo todo em um arquivo. A captura só começa quando você clicar em iniciar.</p>
+<section class="controls">
+<label for="duration">Salvar os últimos</label>
+<select id="duration"><option value="30">30 segundos</option><option value="60">1 minuto</option><option value="120">2 minutos</option></select>
+<div class="actions"><button id="start" class="primary">Iniciar captura</button><button id="stop" disabled>Parar</button></div>
+<button id="save" disabled>Salvar clipe .wav</button>
+<p id="status" role="status" aria-live="polite">Captura desligada.</p>
+</section>
+<p class="note">Captura o som reproduzido no computador, inclusive de outros aplicativos. Não inclui seu microfone. O áudio fica somente na memória até você escolher onde salvar. Avise as pessoas da call antes de gravar.</p>
+</main>
+</body>
+</html>

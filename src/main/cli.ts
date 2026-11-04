@@ -46,7 +46,11 @@ const options = {
     },
     repair: {
         type: "boolean",
-        description: "Repair the application by re-downloading the latest Vencord files"
+        description: "Check the bundled SeCord files"
+    },
+    clips: {
+        type: "boolean",
+        description: "Abrir a janela de clipes de áudio"
     }
 } satisfies Record<string, Option>;
 
@@ -85,13 +89,13 @@ export function checkCommandLineForHelpOrVersion() {
     const { help, version } = CommandLine.values;
 
     if (version) {
-        console.log(`Vesktop v${app.getVersion()}`);
+        console.log(`SeCord v${app.getVersion()}`);
         app.exit(0);
     }
 
     if (help) {
         const base = stripIndent`
-            Vesktop v${app.getVersion()}
+            SeCord v${app.getVersion()}
 
             Usage: ${basename(process.execPath)} [options] [url]
 
@@ -101,7 +105,7 @@ export function checkCommandLineForHelpOrVersion() {
             Chromium Options:
               See <https://peter.sh/experiments/chromium-command-line-switches> - only some of them work
 
-            Vesktop Options:
+            SeCord Options:
         `;
 
         const optionLines = Object.entries(options)

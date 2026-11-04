@@ -27,6 +27,7 @@ import {
 import { IpcEvents } from "../shared/IpcEvents";
 import { setBadgeCount } from "./appBadge";
 import { autoStart } from "./autoStart";
+import { openClipWindow } from "./clipWindow";
 import { enableHardwareAcceleration } from "./main";
 import { mainWin } from "./mainWindow";
 import { Settings, State } from "./settings";
@@ -60,6 +61,7 @@ if (IS_DEV) {
 
 handleSync(IpcEvents.GET_SETTINGS, () => Settings.plain);
 handleSync(IpcEvents.GET_VERSION, () => app.getVersion());
+handle(IpcEvents.OPEN_CLIPS, () => openClipWindow());
 handleSync(IpcEvents.GET_ENABLE_HARDWARE_ACCELERATION, () => enableHardwareAcceleration);
 
 handleSync(

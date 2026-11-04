@@ -23,6 +23,7 @@ import { once } from "shared/utils/once";
 import type { SettingsStore } from "shared/utils/SettingsStore";
 
 import { createAboutWindow } from "./about";
+import { openClipWindow } from "./clipWindow";
 import { CommandLine } from "./cli";
 import { BrowserUserAgent, DEFAULT_HEIGHT, DEFAULT_WIDTH, MIN_HEIGHT, MIN_WIDTH } from "./constants";
 import { AppEvents } from "./events";
@@ -34,7 +35,7 @@ import { destroyTray, initTray } from "./tray";
 import { clearData } from "./utils/clearData";
 import { makeLinksOpenExternally } from "./utils/makeLinksOpenExternally";
 import { applyDeckKeyboardFix, askToApplySteamLayout, isDeckGameMode } from "./utils/steamOS";
-import { downloadVencordFiles, ensureVencordFiles } from "./utils/vencordLoader";
+import { ensureVencordFiles } from "./utils/vencordLoader";
 import { VENCORD_FILES_DIR } from "./vencordFilesDir";
 
 let isQuitting = false;
@@ -77,24 +78,21 @@ function initMenuBar(win: BrowserWindow) {
 
     const subMenu = [
         {
-            label: "About Vesktop",
+            label: "Sobre o SeCord",
             click: createAboutWindow
         },
         {
-            label: "Force Update Vencord",
-            async click() {
-                await downloadVencordFiles();
-                app.relaunch();
-                app.quit();
-            },
-            toolTip: "Vesktop will automatically restart after this operation"
+            label: "Clipes de áudio",
+            accelerator: "CmdOrCtrl+Alt+C",
+            enabled: isWindows,
+            click: openClipWindow
         },
         {
-            label: "Reset Vesktop",
+            label: "Redefinir SeCord",
             async click() {
                 await clearData(win);
             },
-            toolTip: "Vesktop will automatically restart after this operation"
+            toolTip: "O SeCord será reiniciado após esta operação"
         },
         {
             label: "Relaunch",
@@ -180,7 +178,7 @@ function initMenuBar(win: BrowserWindow) {
 
     const menuItems = [
         {
-            label: "Vesktop",
+            label: "SeCord",
             role: "appMenu",
             submenu: subMenu.filter(isTruthy)
         },
@@ -289,7 +287,7 @@ function initStaticTitle(win: BrowserWindow) {
 
     addSettingsListener("staticTitle", enabled => {
         if (enabled) {
-            win.setTitle("Vesktop");
+            win.setTitle("SeCord");
             win.on("page-title-updated", listener);
         } else {
             win.off("page-title-updated", listener);
@@ -382,7 +380,7 @@ function buildBrowserWindowOptions(): BrowserWindowConstructorOptions {
     }
 
     if (staticTitle) {
-        options.title = "Vesktop";
+        options.title = "SeCord";
     }
 
     if (process.platform === "darwin") {

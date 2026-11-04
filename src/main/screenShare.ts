@@ -10,6 +10,7 @@ import { desktopCapturer, session, Streams } from "electron";
 import type { StreamPick } from "renderer/components/ScreenSharePicker";
 import { IpcCommands, IpcEvents } from "shared/IpcEvents";
 
+import { isClipFrame } from "./clipWindow";
 import { sendRendererCommand } from "./ipcCommands";
 import { handle } from "./utils/ipcWrappers";
 
@@ -31,6 +32,13 @@ export function registerScreenShareHandler() {
     });
 
     session.defaultSession.setDisplayMediaRequestHandler(async (request, callback) => {
+        if (isClipFrame(request.frame)) {
+            if (process.platform !== "win32" || !request.userGesture || !request.audioRequested) return callback(null);
+            const screens = await desktopCapturer.getSources({ types: ["screen"], thumbnailSize: { width: 64, height: 64 } });
+            callback(screens[0] ? { video: screens[0], audio: "loopback" } : null);
+            return;
+        }
+
         // request full resolution on wayland right away because we always only end up with one result anyway
         const width = isWayland ? 1920 : 176;
         const sources = await desktopCapturer

@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import "./cli";
-import "./updater";
+import { CommandLine } from "./cli";
 import "./ipc";
 import "./rpc";
 import "./userAssets";
@@ -13,16 +12,16 @@ import "./vesktopProtocol";
 import { app, BrowserWindow, nativeTheme } from "electron";
 
 import { DATA_DIR } from "./constants";
+import { openClipWindow } from "./clipWindow";
 import { createFirstLaunchTour } from "./firstLaunch";
 import { createWindows, mainWin } from "./mainWindow";
 import { registerMediaPermissionsHandler } from "./mediaPermissions";
 import { registerScreenShareHandler } from "./screenShare";
 import { Settings, State } from "./settings";
-import { setAsDefaultProtocolClient } from "./utils/setAsDefaultProtocolClient";
 import { showWindow } from "./utils/showWindow";
 import { isDeckGameMode } from "./utils/steamOS";
 
-console.log("Vesktop v" + app.getVersion());
+console.log("SeCord v" + app.getVersion());
 
 // Make the Vencord files use our DATA_DIR
 process.env.VENCORD_USER_DATA_DIR = DATA_DIR;
@@ -32,8 +31,6 @@ const isLinux = process.platform === "linux";
 export let enableHardwareAcceleration = true;
 
 function init() {
-    setAsDefaultProtocolClient("discord");
-
     const { disableSmoothScroll, hardwareAcceleration, hardwareVideoAcceleration } = Settings.store;
 
     const enabledFeatures = new Set(app.commandLine.getSwitchValue("enable-features").split(","));
@@ -92,18 +89,20 @@ function init() {
     // In the Flatpak on SteamOS the theme is detected as light, but SteamOS only has a dark mode, so we just override it
     if (isDeckGameMode) nativeTheme.themeSource = "dark";
 
-    app.on("second-instance", (_event, _cmdLine, _cwd, data: any) => {
+    app.on("second-instance", (_event, cmdLine, _cwd, data: any) => {
         if (data.IS_DEV) app.quit();
+        else if (cmdLine.includes("--clips")) openClipWindow();
         else if (mainWin) showWindow(mainWin);
     });
 
     app.whenReady().then(async () => {
-        if (process.platform === "win32") app.setAppUserModelId("dev.vencord.vesktop");
+        if (process.platform === "win32") app.setAppUserModelId("app.secord.desktop");
 
         registerScreenShareHandler();
         registerMediaPermissionsHandler();
 
         bootstrap();
+        if (CommandLine.values.clips) openClipWindow();
 
         app.on("activate", () => {
             if (BrowserWindow.getAllWindows().length === 0) createWindows();
@@ -113,10 +112,10 @@ function init() {
 
 if (!app.requestSingleInstanceLock({ IS_DEV })) {
     if (IS_DEV) {
-        console.log("Vesktop is already running. Quitting previous instance...");
+        console.log("SeCord is already running. Quitting previous instance...");
         init();
     } else {
-        console.log("Vesktop is already running. Quitting...");
+        console.log("SeCord is already running. Quitting...");
         app.quit();
     }
 } else {

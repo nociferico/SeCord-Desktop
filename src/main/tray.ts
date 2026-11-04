@@ -7,12 +7,12 @@
 import { app, BrowserWindow, Menu, Tray } from "electron";
 
 import { createAboutWindow } from "./about";
+import { openClipWindow } from "./clipWindow";
 import { AppEvents } from "./events";
 import { Settings } from "./settings";
 import { resolveAssetPath } from "./userAssets";
 import { clearData } from "./utils/clearData";
 import { showWindow } from "./utils/showWindow";
-import { downloadVencordFiles } from "./utils/vencordLoader";
 
 let tray: Tray;
 let trayVariant: "tray" | "trayUnread" = "tray";
@@ -54,15 +54,12 @@ export async function initTray(win: BrowserWindow, setIsQuitting: (val: boolean)
             click: createAboutWindow
         },
         {
-            label: "Repair Vencord",
-            async click() {
-                await downloadVencordFiles();
-                app.relaunch();
-                app.quit();
-            }
+            label: "Clipes de áudio",
+            enabled: process.platform === "win32",
+            click: openClipWindow
         },
         {
-            label: "Reset Vesktop",
+            label: "Redefinir SeCord",
             async click() {
                 await clearData(win);
             }
@@ -87,7 +84,7 @@ export async function initTray(win: BrowserWindow, setIsQuitting: (val: boolean)
     ]);
 
     tray = new Tray(await resolveAssetPath(trayVariant));
-    tray.setToolTip("Vesktop");
+    tray.setToolTip("SeCord");
     tray.setContextMenu(trayMenu);
     tray.on("click", onTrayClick);
 }

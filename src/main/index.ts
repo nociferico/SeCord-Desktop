@@ -7,11 +7,16 @@
 import { app } from "electron";
 
 import { CommandLine } from "./cli";
-import { downloadVencordFiles } from "./utils/vencordLoader";
+import { ensureVencordFiles } from "./utils/vencordLoader";
 
 if (CommandLine.values.repair) {
-    console.log("Repairing Vesktop...");
-    downloadVencordFiles().then(() => app.quit());
+    console.log("Checking SeCord files...");
+    ensureVencordFiles()
+        .then(() => app.quit())
+        .catch(error => {
+            console.error(error);
+            app.exit(1);
+        });
 } else {
     require("./main");
 }

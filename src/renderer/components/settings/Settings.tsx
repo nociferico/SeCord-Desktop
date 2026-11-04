@@ -6,7 +6,7 @@
 
 import "./settings.css";
 import { classNameFactory } from "@vencord/types/api/Styles";
-import { Divider, ErrorBoundary, Text } from "@vencord/types/components";
+import { Button, Divider, ErrorBoundary, Text } from "@vencord/types/components";
 import { ComponentType } from "react";
 import { WebRTCIPHandlingPolicyPicker } from "renderer/components/settings/WebRTCIPHandlingPolicyPicker";
 import { getValueAndOnChange, Settings, useSettings } from "renderer/settings";
@@ -16,7 +16,6 @@ import { AutoStartToggle } from "./AutoStartToggle";
 import { DeveloperOptionsButton } from "./DeveloperOptions";
 import { DiscordBranchPicker } from "./DiscordBranchPicker";
 import { NotificationBadgeToggle } from "./NotificationBadgeToggle";
-import { OutdatedVesktopWarning } from "./OutdatedVesktopWarning";
 import { UserAssetsButton } from "./UserAssets";
 import { VesktopSettingsSwitch } from "./VesktopSettingsSwitch";
 import { WindowsTransparencyControls } from "./WindowsTransparencyControls";
@@ -34,120 +33,128 @@ export const cl = classNameFactory("vcd-settings-");
 export type SettingsComponent = ComponentType<{ settings: typeof Settings.store }>;
 
 const SettingsOptions: Record<string, Array<BooleanSetting | SettingsComponent>> = {
-    "Discord Branch": [DiscordBranchPicker],
-    "System Startup & Performance": [
+    "Versão do Discord": [DiscordBranchPicker],
+    "Inicialização e desempenho": [
         AutoStartToggle,
         {
             key: "hardwareAcceleration",
-            title: "Hardware Acceleration",
-            description: "Enable hardware acceleration"
+            title: "Aceleração por hardware",
+            description: "Usa a placa de vídeo para ajudar a desenhar a interface."
         },
         {
             key: "hardwareVideoAcceleration",
-            title: "Video Hardware Acceleration",
+            title: "Aceleração de vídeo",
             description:
-                "Enable hardware video acceleration. This can improve performance of screenshare and video playback, but may cause graphical glitches and infinitely loading streams.",
+                "Pode melhorar a reprodução e a transmissão, mas em alguns computadores causa falhas visuais. Reinicie após mudar.",
             disabled: () => !Settings.store.hardwareAcceleration
         }
     ],
-    "User Interface": [
+    "Aparência da janela": [
         {
             key: "nativeTitleBar",
-            title: "Native Titlebar",
-            description: "Enable the system titlebar in addition to Discord's custom one. Requires a full restart."
+            title: "Barra de título do Windows",
+            description: "Mostra a barra de título do sistema. Exige reiniciar o aplicativo."
         },
         {
             key: "staticTitle",
-            title: "Static Title",
-            description: 'Makes the window title "Vesktop" instead of changing to the current page'
+            title: "Título fixo",
+            description: 'Mantém "SeCord" no título da janela.'
         },
         {
             key: "enableMenu",
-            title: "Enable Menu Bar",
-            description: "Enables the application menu bar. Press ALT to toggle visibility.",
+            title: "Barra de menu",
+            description: "Mostra o menu do aplicativo. Pressione Alt para alternar a visibilidade.",
             disabled: () => !Settings.store.nativeTitleBar
         },
         {
             key: "enableShadow",
-            title: "Enable Window Shadow",
-            description: "Enables the window shadow. Requires a full restart.",
+            title: "Sombra da janela",
+            description: "Mostra a sombra ao redor da janela. Exige reiniciar.",
             disabled: () => Settings.store.nativeTitleBar
         },
         {
             key: "enableRoundedCorners",
-            title: "Enable Rounded Corners",
-            description: "Enables rounded corners. Requires a full restart.",
+            title: "Cantos arredondados",
+            description: "Arredonda os cantos da janela. Exige reiniciar.",
             disabled: () => Settings.store.nativeTitleBar
         },
         {
             key: "enableSplashScreen",
-            title: "Enable Splash Screen",
+            title: "Tela de abertura",
             description:
-                "Shows a small splash screen while Vesktop is loading. Disabling this option will show the main window earlier while it's still loading."
+                "Mostra a logo enquanto o SeCord carrega."
         },
         {
             key: "splashTheming",
-            title: "Splash theming",
-            description: "Adapt the splash window colors to your custom theme"
+            title: "Cores da tela de abertura",
+            description: "Adapta a tela de abertura às cores do seu tema."
         },
         WindowsTransparencyControls,
         UserAssetsButton
     ],
-    Behaviour: [
+    Comportamento: [
         {
             key: "tray",
-            title: "Tray Icon",
-            description: "Add a tray icon for Vesktop",
+            title: "Ícone na bandeja",
+            description: "Mantém um ícone do SeCord perto do relógio do Windows.",
             invisible: () => isMac
         },
         {
             key: "minimizeToTray",
-            title: "Minimize to tray",
-            description: "Hitting X will make Vesktop minimize to the tray instead of closing",
+            title: "Minimizar ao fechar",
+            description: "O botão X esconde o SeCord na bandeja em vez de encerrá-lo.",
             invisible: () => isMac,
             disabled: () => !Settings.store.tray
         },
         {
             key: "clickTrayToShowHide",
-            title: "Hide/Show on tray click",
-            description: "Left clicking tray icon will toggle the vesktop window visibility."
+            title: "Alternar janela pelo ícone",
+            description: "Clique no ícone da bandeja para mostrar ou esconder a janela."
         },
         {
             key: "disableMinSize",
-            title: "Disable minimum window size",
-            description: "Allows you to make the window as small as your heart desires"
+            title: "Permitir janela menor",
+            description: "Deixa reduzir a janela abaixo do tamanho mínimo padrão."
         },
         {
             key: "disableSmoothScroll",
-            title: "Disable smooth scrolling",
-            description: "Disables smooth scrolling"
+            title: "Desativar rolagem suave",
+            description: "Usa rolagem imediata nas listas e mensagens."
         }
     ],
-    Notifications: [
+    Notificações: [
         NotificationBadgeToggle,
         {
             key: "enableTaskbarFlashing",
-            title: "Enable Taskbar Flashing",
-            description: "Flashes the app in your taskbar when you have new notifications."
+            title: "Piscar na barra de tarefas",
+            description: "Chama a atenção para novas notificações na barra de tarefas."
         }
     ],
-    Miscellaneous: [
+    "Voz e clipes": [
+        () => (
+            <div>
+                <Text size="md">Grave o som reproduzido no computador e salve os últimos 30, 60 ou 120 segundos. A captura começa somente depois do seu clique.</Text>
+                <div style={{ marginTop: 12 }}><Button onClick={() => VesktopNative.app.openClips()}>Abrir clipes de áudio</Button></div>
+            </div>
+        )
+    ],
+    Outros: [
         {
             key: "arRPC",
             title: "Rich Presence",
-            description: "Lets games and apps connect to Vesktop for Rich Presence and game detection"
+            description: "Mostra a atividade de jogos e aplicativos no seu perfil, se você permitir."
         },
 
         {
             key: "openLinksWithElectron",
-            title: "Open Links in app (experimental)",
-            description: "Opens links in a new Vesktop window instead of your web browser"
+            title: "Abrir links no aplicativo (experimental)",
+            description: "Abre links em outra janela do SeCord."
         },
 
         WebRTCIPHandlingPolicyPicker
     ],
 
-    "Developer Options": [DeveloperOptionsButton]
+    "Desenvolvimento": [DeveloperOptionsButton]
 };
 
 function SettingsSections() {
@@ -189,13 +196,11 @@ export default ErrorBoundary.wrap(
     function SettingsUI() {
         return (
             <section>
-                <OutdatedVesktopWarning />
                 <SettingsSections />
             </section>
         );
     },
     {
-        message:
-            "Failed to render the Vesktop Settings tab. If this issue persists, try to right click the Vesktop tray icon, then click 'Repair Vencord'. And make sure your Vesktop is up to date."
+        message: "Não foi possível abrir os ajustes do SeCord. Reinicie o aplicativo."
     }
 );

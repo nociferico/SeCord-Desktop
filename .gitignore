@@ -1,4 +1,6 @@
 dist
+release
+static/nocicord/
 node_modules
 .env
 .DS_Store
