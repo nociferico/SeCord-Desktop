@@ -4,19 +4,23 @@ SeCord é um aplicativo Windows separado do Discord original. Usa a base aberta 
 
 ## Instalar
 
-O instalador está disponível na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases), quando publicado. Ao compilar localmente, ele fica em `release/SeCord Setup 0.3.0-beta.2.exe`. O arquivo `release/win-unpacked/SeCord.exe` é apenas para teste dentro da pasta completa. O instalador local não tem assinatura digital.
+O instalador está disponível na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases), quando publicado. Ao compilar localmente, ele fica em `release/SeCord Setup 0.3.0-beta.3.exe`. O arquivo `release/win-unpacked/SeCord.exe` é apenas para teste dentro da pasta completa. O instalador local não tem assinatura digital.
 
 ## Extensões e favoritos
 
 A tela **Extensões** está em português. As descrições e opções comuns foram traduzidas; nomes técnicos das extensões permanecem reconhecíveis. A lista mostra primeiro **Favoritas**, depois **Mais úteis para começar** e, abaixo, as demais. Clique na estrela de um cartão para fixar ou desafixar.
 
-**MessageLogger** vem ativado por padrão em instalações novas. Ele marca com fundo vermelho mensagens apagadas que o cliente já recebeu e mostra edições. Seu registro é temporário: não recupera mensagens anteriores, nunca carregadas ou de outros dispositivos. Uma preferência anterior do usuário não é sobrescrita.
+**MessageLogger** vem ativado e favoritado por padrão em instalações novas; uma preferência anterior do usuário não é sobrescrita. Ele marca com fundo vermelho mensagens apagadas que o cliente já recebeu e mostra edições. A opção **Guardar mensagens apagadas**, ativada por padrão, mantém até 500 mensagens por 30 dias neste computador. O registro pode ser consultado e apagado nas opções da extensão após reiniciar o SeCord. As marcas vermelhas dentro da conversa ainda dependem das mensagens carregadas na sessão atual. Ele não recupera mensagens anteriores, nunca carregadas ou de outros dispositivos.
 
 A seção recomendada é uma seleção editorial, não um ranking de uso medido. A lista inclui MessageLogger, ShowHiddenChannels, FakeNitro, SpotifyControls, BetterGifPicker, BetterFolders, ClearURLs, Translate, FavoriteEmojiFirst, SilentMessageToggle, ReadAllNotificationsButton e VolumeBooster.
 
 **ShowHiddenChannels** é opcional. Quando ativo, mostra na lista os canais ocultos cujos dados o Discord entregar ao aplicativo. Clicar abre uma prévia local, com metadados disponíveis e sem mensagens, campo de conversa ou entrada em voz. Canais que o servidor não enviar continuam invisíveis. Não concede permissões do servidor.
 
-O **SpotifyControls** tem uma bússola acima do player. Ao clicar, abre uma busca compacta com três faixas visíveis e rolagem para carregar mais. A busca usa a conta Spotify conectada ao Discord; o player aparece quando há música e dispositivo ativos. Ao escolher uma faixa, o SeCord tenta reproduzi-la no dispositivo ativo. A reprodução direta pode exigir Spotify Premium; se falhar, a faixa abre no Spotify. Não foi possível testar a busca com uma conta conectada neste ambiente.
+O **SpotifyControls** tem uma bússola acima do player. Ao clicar, abre uma busca compacta com três faixas visíveis e rolagem para carregar mais. A busca usa a conta Spotify conectada ao Discord; o player aparece quando há música e dispositivo ativos. Ao escolher uma faixa, o SeCord consulta os dispositivos do Spotify e tenta reproduzi-la no dispositivo ativo. Se não houver dispositivo ativo ou o Spotify recusar o comando, a busca mostra o motivo e oferece um botão para abrir a faixa no Spotify. A reprodução direta exige Spotify Premium. Não foi possível testar a busca com uma conta conectada neste ambiente.
+
+## Tradução de mensagens
+
+A extensão **Translate** agora oferece opções separadas para traduzir automaticamente mensagens enviadas e recebidas. A tradução recebida aparece abaixo do texto original. O idioma de origem pode ficar em **detecção automática**, útil quando a conversa mistura idiomas. A tradução depende da disponibilidade do provedor escolhido e é aplicada às mensagens que o SeCord carregar; não altera o texto salvo no Discord.
 
 ## Clipes de áudio
 

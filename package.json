@@ -1,10 +1,10 @@
 {
     "name": "secord-desktop",
-    "version": "0.3.0-beta.2",
+    "version": "0.3.0-beta.3",
     "private": true,
     "description": "SeCord (SoulEater), a separate Discord desktop app with a custom client",
     "keywords": [],
-    "homepage": "https://github.com/Vencord/Vesktop",
+    "homepage": "https://github.com/nociferico/SeCord-Desktop",
     "license": "GPL-3.0-or-later",
     "author": "Vendicated <vendicated@riseup.net>",
     "main": "dist/js/main.js",

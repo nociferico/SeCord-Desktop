@@ -7,7 +7,7 @@ import { writeFile } from "fs/promises";
 import { join } from "path";
 
 import { BrowserWindow, dialog, ipcMain } from "electron";
-import { STATIC_DIR } from "shared/paths";
+import { loadView } from "./vesktopStatic";
 
 let clipWindow: BrowserWindow | null = null;
 
@@ -35,7 +35,7 @@ export function openClipWindow() {
             preload: join(__dirname, "clipPreload.js")
         }
     });
-    clipWindow.loadFile(join(STATIC_DIR, "views", "clips.html"));
+    void loadView(clipWindow, "clips.html");
     clipWindow.on("closed", () => (clipWindow = null));
 }
 

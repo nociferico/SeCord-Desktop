@@ -2,7 +2,7 @@
 import { join } from "path";
 
 import { BrowserWindow, clipboard, desktopCapturer, ipcMain } from "electron";
-import { STATIC_DIR } from "shared/paths";
+import { loadView } from "./vesktopStatic";
 
 let streamWindow: BrowserWindow | null = null;
 let selectedSourceId: string | null = null;
@@ -35,7 +35,12 @@ export function openStreamWindow() {
             preload: join(__dirname, "streamPreload.js")
         }
     });
-    streamWindow.loadFile(join(STATIC_DIR, "views", "stream.html"));
+    void loadView(streamWindow, "stream.html").catch(error => {
+        console.error("Failed to load SeCord stream view", error);
+        if (streamWindow && !streamWindow.isDestroyed()) {
+            void streamWindow.loadURL("data:text/html;charset=utf-8," + encodeURIComponent("<html lang='pt-BR'><body style='background:#17151d;color:#f1edf4;font:16px sans-serif;padding:30px'><h1>Não foi possível abrir a transmissão.</h1><p>Reinicie o SeCord ou instale a versão mais recente.</p></body></html>"));
+        }
+    });
     streamWindow.on("closed", () => { streamWindow = null; selectedSourceId = null; });
 }
 

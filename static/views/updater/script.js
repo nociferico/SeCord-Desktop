@@ -40,7 +40,7 @@ if (portable) updateButton.textContent = "Download update";
 
 updateButton.addEventListener("click", () => {
     if (portable) {
-        window.open(`https://github.com/Vencord/Vesktop/releases/tag/v${update.version}`);
+        window.open(`https://github.com/nociferico/SeCord-Desktop/releases/tag/v${update.version}`);
         return;
     }
 

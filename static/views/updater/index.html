@@ -2,7 +2,7 @@
 <meta charset="utf-8" />
 
 <head>
-    <title>Vesktop Updater</title>
+    <title>Atualizações do SeCord</title>
     <meta
         http-equiv="Content-Security-Policy"
         content="
@@ -18,36 +18,35 @@
 
 <body>
     <header>
-        <h1>An update is available!</h1>
+        <h1>Uma atualização está disponível</h1>
     </header>
 
     <main>
         <p id="versions">
-            <span class="label">Current version:</span> <span id="current-version" class="value"></span>
-            <span class="label">New version:</span> <span id="new-version" class="value"></span>
+            <span class="label">Versão atual:</span> <span id="current-version" class="value"></span>
+            <span class="label">Nova versão:</span> <span id="new-version" class="value"></span>
         </p>
-        <h2>Release Notes</h2>
+        <h2>Novidades</h2>
 
         <div id="release-notes"></div>
     </main>
 
     <footer>
         <section id="buttons">
-            <button id="update-button" class="green">Install update & restart</button>
-            <button id="later-button" class="grey">Remind me later</button>
-            <button id="ignore-button" class="grey">Ignore this update</button>
+            <button id="update-button" class="green">Instalar e reiniciar</button>
+            <button id="later-button" class="grey">Lembrar depois</button>
+            <button id="ignore-button" class="grey">Ignorar esta versão</button>
         </section>
     </footer>
 
     <dialog id="update-dialog" closedby="none">
-        <h2>Downloading Update</h2>
+        <h2>Baixando atualização</h2>
         <p>
-            Please wait while the update is being downloaded. Once the update finished downloading, it will
-            automatically install and Vesktop will restart.
+            Aguarde o download. Quando terminar, a atualização será instalada e o SeCord reiniciará.
         </p>
 
         <p id="linux-note" class="hidden">
-            You will likely be prompted to enter your password. Do so to finish the update.
+            O sistema pode pedir sua senha para concluir a atualização.
         </p>
 
         <progress id="download-progress" value="0" max="100"></progress>
@@ -56,8 +55,8 @@
     </dialog>
 
     <dialog id="installing-dialog" closedby="none">
-        <h2>Installing Update</h2>
-        <p>Please wait while the update is being installed. Vesktop will restart shortly.</p>
+        <h2>Instalando atualização</h2>
+        <p>Aguarde a instalação. O SeCord reiniciará em instantes.</p>
 
         <div class="spinner-wrapper">
             <div class="spinner"></div>
