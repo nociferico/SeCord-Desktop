@@ -24,7 +24,7 @@ A extensão **Translate** agora oferece opções separadas para traduzir automat
 
 ## Spotify na chamada
 
-Em **Configurações → SeCord → Spotify na chamada**, ative **Evitar pausa do Spotify** e reinicie com `Ctrl+Shift+R`. A opção impede a rotina de pausa do cliente de executar durante a chamada. Ela não controla pausas originadas no aplicativo do Spotify ou em outro dispositivo. O teste de reprodução contínua em uma chamada real ainda está pendente.
+Em **Configurações → SeCord → Spotify na chamada**, ative **Evitar pausa do Spotify** e reinicie com `Ctrl+Shift+R`. A opção impede a rotina de pausa do cliente de executar durante a chamada. Ela não controla pausas originadas no aplicativo do Spotify ou em outro dispositivo. O usuário confirmou que, após ativá-la, a música continuou tocando em uma chamada de mais de 30 segundos na beta.8. Outros dispositivos e situações ainda podem se comportar de modo diferente.
 
 ## Indicadores de plataforma
 
