@@ -4,7 +4,7 @@ SeCord é um aplicativo Windows separado do Discord original. Usa a base aberta 
 
 ## Instalar
 
-O instalador está disponível na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases), quando publicado. Ao compilar localmente, ele fica em `release/SeCord Setup 0.3.0-beta.4.exe`. O arquivo `release/win-unpacked/SeCord.exe` é apenas para teste dentro da pasta completa. O instalador local não tem assinatura digital.
+O instalador está disponível na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases), quando publicado. Ao compilar localmente, ele fica em `release/SeCord Setup 0.3.0-beta.8.exe`. O arquivo `release/win-unpacked/SeCord.exe` é apenas para teste dentro da pasta completa. O instalador local não tem assinatura digital.
 
 ## Extensões e favoritos
 
@@ -12,7 +12,7 @@ A tela **Extensões** está em português. As descrições e opções comuns for
 
 **MessageLogger** vem ativado e favoritado por padrão em instalações novas; uma preferência anterior do usuário não é sobrescrita. Ele marca com fundo vermelho mensagens apagadas que o cliente já recebeu e mostra edições. A opção **Guardar mensagens apagadas**, ativada por padrão, mantém até 500 mensagens por 30 dias neste computador. O registro pode ser consultado e apagado nas opções da extensão após reiniciar o SeCord. As marcas vermelhas dentro da conversa ainda dependem das mensagens carregadas na sessão atual. Ele não recupera mensagens anteriores, nunca carregadas ou de outros dispositivos.
 
-A seção recomendada é uma seleção editorial, não um ranking de uso medido. A lista inclui MessageLogger, ShowHiddenChannels, FakeNitro, SpotifyControls, BetterGifPicker, BetterFolders, ClearURLs, Translate, FavoriteEmojiFirst, SilentMessageToggle, ReadAllNotificationsButton e VolumeBooster.
+A seção recomendada é uma seleção editorial, não um ranking de uso medido. A lista inclui MessageLogger, ShowHiddenChannels, FakeNitro, SpotifyControls, SpotifySemPausa, BetterGifPicker, BetterFolders, ClearURLs, Translate, FavoriteEmojiFirst, SilentMessageToggle, ReadAllNotificationsButton e VolumeBooster.
 
 **ShowHiddenChannels** é opcional. Quando ativo, mostra na lista os canais ocultos cujos dados o Discord entregar ao aplicativo. Clicar abre uma prévia local, com metadados disponíveis e sem mensagens, campo de conversa ou entrada em voz. Canais que o servidor não enviar continuam invisíveis. Não concede permissões do servidor.
 
@@ -21,6 +21,10 @@ O **SpotifyControls** tem uma bússola acima do player. Ao clicar, abre uma busc
 ## Tradução de mensagens
 
 A extensão **Translate** agora oferece opções separadas para traduzir automaticamente mensagens enviadas e recebidas. A tradução recebida aparece abaixo do texto original. O idioma de origem pode ficar em **detecção automática**, útil quando a conversa mistura idiomas. A tradução depende da disponibilidade do provedor escolhido e é aplicada às mensagens que o SeCord carregar; não altera o texto salvo no Discord.
+
+## Spotify na chamada
+
+Em **Configurações → SeCord → Spotify na chamada**, ative **Evitar pausa do Spotify** e reinicie com `Ctrl+Shift+R`. A opção impede a rotina de pausa do cliente de executar durante a chamada. Ela não controla pausas originadas no aplicativo do Spotify ou em outro dispositivo. O teste de reprodução contínua em uma chamada real ainda está pendente.
 
 ## Indicadores de plataforma
 
@@ -42,7 +46,7 @@ Algumas redes exigem um servidor TURN para a mídia passar. Esta versão usa ape
 
 ## Recursos e limites
 
-FakeNitro pode enviar emojis e figurinhas como links ou imagens quando o canal permitir; não concede Nitro. Cosméticos locais podem aparecer apenas para você ou para outros usuários da mesma extensão. Captura de tela e sons de outros servidores dependem das permissões do sistema e do Discord. Se alguém aplicar server deaf ou restringir o soundboard, o SeCord não remove essa permissão.
+FakeNitro pode enviar emojis e figurinhas como links ou imagens quando o canal permitir; não concede Nitro. A decoração personalizada testada anteriormente foi removida deste pacote. Captura de tela e sons de outros servidores dependem das permissões do sistema e do Discord. Se alguém aplicar server deaf ou restringir o soundboard, o SeCord não remove essa permissão.
 
 **Go Live no Brasil:** o Discord informa que suspendeu a transmissão de tela e o vídeo em tempo real para usuários no Brasil por determinação da ANPD. A restrição também afeta quem usa o SeCord, pois ele se conecta ao serviço do Discord. Uma atualização do SeCord, qualidade de captura ou permissão local não reativa o Go Live nativo. Consulte o [aviso oficial do Discord](https://support.discord.com/hc/pt-br/articles/42704051358359-Por-que-os-recursos-de-v%C3%ADdeo-est%C3%A3o-indispon%C3%ADveis-no-Brasil-no-momento).
 
