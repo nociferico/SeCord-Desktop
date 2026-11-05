@@ -5,7 +5,10 @@ import { fileURLToPath } from "node:url";
 import { WebSocket, WebSocketServer } from "ws";
 
 const MAX_VIEWERS = 4;
+const MAX_ROOMS = 100;
+const MAX_CONNECTIONS = 500;
 const MAX_MESSAGE_BYTES = 256_000;
+const IDLE_MS = 180_000;
 const ROOM_ID = /^[a-f0-9]{32}$/;
 const SIGNAL_TYPES = new Set(["offer", "answer", "ice"]);
 
@@ -20,14 +23,25 @@ export function createSignalServer({ host = "127.0.0.1", port = 8787 } = {}) {
         response.end(JSON.stringify({ ok: true, rooms: rooms.size }));
     });
     const sockets = new WebSocketServer({ server: http, path: "/signal", maxPayload: MAX_MESSAGE_BYTES });
+    const lastSeen = new WeakMap();
+    const reap = setInterval(() => {
+        const now = Date.now();
+        for (const socket of sockets.clients) {
+            if (now - (lastSeen.get(socket) ?? now) > IDLE_MS) socket.terminate();
+        }
+    }, 30_000);
+    reap.unref();
 
     function send(socket, message) {
         if (socket.readyState === WebSocket.OPEN) socket.send(JSON.stringify(message));
     }
 
     sockets.on("connection", socket => {
+        if (sockets.clients.size > MAX_CONNECTIONS) { socket.close(1013, "Servidor ocupado"); return; }
+        lastSeen.set(socket, Date.now());
         let membership;
         socket.on("message", raw => {
+            lastSeen.set(socket, Date.now());
             let message;
             try { message = JSON.parse(raw.toString()); } catch { send(socket, { t: "error", message: "Mensagem inválida." }); return; }
             if (!message || typeof message !== "object" || typeof message.t !== "string") return;
@@ -36,6 +50,7 @@ export function createSignalServer({ host = "127.0.0.1", port = 8787 } = {}) {
             if (!membership && (message.t === "create" || message.t === "join")) {
                 if (!ROOM_ID.test(message.room ?? "")) { send(socket, { t: "error", message: "Código de sala inválido." }); return; }
                 if (message.t === "create") {
+                    if (rooms.size >= MAX_ROOMS) { send(socket, { t: "error", message: "Servidor cheio. Tente novamente mais tarde." }); return; }
                     if (rooms.has(message.room)) { send(socket, { t: "error", message: "Sala já existe." }); return; }
                     membership = { room: message.room, role: "host", id: "host" };
                     rooms.set(message.room, { host: socket, viewers: new Map() });
@@ -79,6 +94,7 @@ export function createSignalServer({ host = "127.0.0.1", port = 8787 } = {}) {
     return {
         listen: () => new Promise(resolve => http.listen(port, host, () => resolve(http.address()))),
         close: () => new Promise(resolve => {
+            clearInterval(reap);
             for (const socket of sockets.clients) socket.terminate();
             sockets.close();
             http.close(resolve);
