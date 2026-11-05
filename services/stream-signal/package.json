@@ -6,7 +6,8 @@
   "engines": { "node": ">=22" },
   "scripts": {
     "start": "node server.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "test:ui": "electron ui-smoke.cjs"
   },
   "dependencies": { "ws": "^8.21.3" }
 }
