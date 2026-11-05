@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; connect-src ws: wss:; media-src 'self' blob:;" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SeCord — transmissão própria</title>
+<link rel="stylesheet" href="stream.css" />
+<script src="stream.js" defer></script>
+</head>
+<body>
+<main>
+<header class="masthead"><img src="../secord-logo.png" alt="" /><div><h1>Transmissão SeCord</h1><p>SeCord <span>(SoulEater)</span></p></div></header>
+<p class="intro">Compartilhe uma tela em uma sala separada. O vídeo aparece no visualizador do SeCord para quem tiver seu convite.</p>
+<div class="layout">
+<section class="panel">
+<h2>Transmitir</h2>
+<p>Escolha uma janela ou tela. A captura começa só depois de clicar em iniciar.</p>
+<div class="row"><button id="refresh" type="button">Atualizar telas</button><span id="source-count"></span></div>
+<div id="sources" class="sources" role="group" aria-label="Telas disponíveis"></div>
+<div class="settings">
+<label>Qualidade<select id="quality"><option value="480">480p</option><option value="720" selected>720p</option><option value="1080">1080p</option></select></label>
+<label>Quadros por segundo<select id="fps"><option value="30" selected>30 fps</option><option value="60">60 fps</option></select></label>
+<label class="audio"><input id="audio" type="checkbox" checked /> Incluir áudio do computador</label>
+</div>
+<div class="actions"><button id="start" class="primary" type="button" disabled>Iniciar transmissão</button><button id="stop" type="button" disabled>Encerrar</button></div>
+<label class="invite-label" for="invite">Convite da sala</label><div class="invite-row"><input id="invite" type="text" readonly placeholder="Aparece após iniciar" /><button id="copy" type="button" disabled>Copiar</button></div>
+<p id="viewers" class="small">Nenhum espectador conectado.</p>
+</section>
+<section class="panel watch">
+<h2>Assistir</h2>
+<p>Cole o convite enviado pela pessoa que está transmitindo.</p>
+<label class="invite-label" for="join-code">Convite recebido</label><input id="join-code" type="text" placeholder="SECORD1|servidor|código" spellcheck="false" />
+<div class="actions"><button id="join" class="primary" type="button">Assistir</button><button id="leave" type="button" disabled>Sair</button></div>
+<div class="video-wrap"><video id="video" autoplay playsinline controls></video><span id="video-empty">A transmissão aparecerá aqui.</span></div>
+<label class="invite-label" for="server">Servidor de conexão</label><input id="server" type="text" spellcheck="false" value="ws://127.0.0.1:8787/signal" />
+<p class="small">Para convidar pela internet, use o endereço WSS do seu servidor. O vídeo vai diretamente entre os participantes sempre que a rede permitir.</p>
+</section>
+</div>
+<p id="status" role="status" aria-live="polite">Pronto para começar.</p>
+<p class="footnote">O convite dá acesso à sala enquanto ela estiver aberta. Compartilhe apenas com quem você deseja convidar. Esta transmissão é separada do Go Live do Discord.</p>
+</main>
+</body>
+</html>

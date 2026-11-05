@@ -11,6 +11,7 @@ verifyDepsBeforeRun: warn
 recursiveInstall: false
 packages:
     - packages/*
+    - services/*
 minimumReleaseAgeExclude:
     - electron
     - "@vencord/*"

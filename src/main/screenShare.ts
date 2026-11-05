@@ -11,6 +11,7 @@ import type { StreamPick } from "renderer/components/ScreenSharePicker";
 import { IpcCommands, IpcEvents } from "shared/IpcEvents";
 
 import { isClipFrame } from "./clipWindow";
+import { isSeCordStreamFrame, selectedStreamSource } from "./streamWindow";
 import { sendRendererCommand } from "./ipcCommands";
 import { handle } from "./utils/ipcWrappers";
 
@@ -32,6 +33,19 @@ export function registerScreenShareHandler() {
     });
 
     session.defaultSession.setDisplayMediaRequestHandler(async (request, callback) => {
+        if (isSeCordStreamFrame(request.frame)) {
+            if (!request.userGesture || !selectedStreamSource()) return callback(null);
+            const sources = await desktopCapturer.getSources({ types: ["window", "screen"], thumbnailSize: { width: 0, height: 0 } });
+            const source = sources.find(item => item.id === selectedStreamSource());
+            if (!source) return callback(null);
+            const stream: Streams = { video: source };
+            if (request.audioRequested && process.platform === "win32") {
+                // @ts-expect-error Electron supports this value on current Windows builds
+                stream.audio = supportsLoopbackWithoutChrome ? "loopbackWithoutChrome" : "loopback";
+            }
+            callback(stream);
+            return;
+        }
         if (isClipFrame(request.frame)) {
             if (process.platform !== "win32" || !request.userGesture || !request.audioRequested) return callback(null);
             const screens = await desktopCapturer.getSources({ types: ["screen"], thumbnailSize: { width: 64, height: 64 } });

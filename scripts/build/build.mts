@@ -116,6 +116,11 @@ await Promise.all([
     }),
     createContext({
         ...NodeCommonOpts,
+        entryPoints: ["src/preload/stream.ts"],
+        outfile: "dist/js/streamPreload.js"
+    }),
+    createContext({
+        ...NodeCommonOpts,
         entryPoints: ["src/preload/updater.ts"],
         outfile: "dist/js/updaterPreload.js",
         footer: { js: "//# sourceURL=VesktopUpdaterPreload" }

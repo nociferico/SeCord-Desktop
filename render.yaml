@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: secord-stream-signal
+    runtime: node
+    plan: free
+    buildCommand: pnpm --filter secord-stream-signal install --prod --frozen-lockfile
+    startCommand: node services/stream-signal/server.mjs
+    healthCheckPath: /health

@@ -130,7 +130,13 @@ const SettingsOptions: Record<string, Array<BooleanSetting | SettingsComponent>>
             description: "Chama a atenção para novas notificações na barra de tarefas."
         }
     ],
-    "Voz e clipes": [
+    "Voz, transmissão e clipes": [
+        () => (
+            <div>
+                <Text size="md">Transmita uma tela pelo visualizador próprio do SeCord. Escolha 480p, 720p ou 1080p e 30 ou 60 fps. Para convidar alguém pela internet, configure um servidor de conexão e compartilhe o código da sala.</Text>
+                <div style={{ marginTop: 12 }}><Button onClick={() => VesktopNative.app.openSeCordStream()}>Abrir transmissão SeCord</Button></div>
+            </div>
+        ),
         () => (
             <div>
                 <Text size="md">Grave o som reproduzido no computador e salve os últimos 30, 60 ou 120 segundos. A captura começa somente depois do seu clique.</Text>

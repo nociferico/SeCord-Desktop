@@ -24,6 +24,7 @@ import type { SettingsStore } from "shared/utils/SettingsStore";
 
 import { createAboutWindow } from "./about";
 import { openClipWindow } from "./clipWindow";
+import { openStreamWindow } from "./streamWindow";
 import { CommandLine } from "./cli";
 import { BrowserUserAgent, DEFAULT_HEIGHT, DEFAULT_WIDTH, MIN_HEIGHT, MIN_WIDTH } from "./constants";
 import { AppEvents } from "./events";
@@ -86,6 +87,11 @@ function initMenuBar(win: BrowserWindow) {
             accelerator: "CmdOrCtrl+Alt+C",
             enabled: isWindows,
             click: openClipWindow
+        },
+        {
+            label: "Transmissão SeCord",
+            accelerator: "CmdOrCtrl+Alt+S",
+            click: openStreamWindow
         },
         {
             label: "Redefinir SeCord",

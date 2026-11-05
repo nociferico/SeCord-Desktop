@@ -8,6 +8,7 @@ import { app, BrowserWindow, Menu, Tray } from "electron";
 
 import { createAboutWindow } from "./about";
 import { openClipWindow } from "./clipWindow";
+import { openStreamWindow } from "./streamWindow";
 import { AppEvents } from "./events";
 import { Settings } from "./settings";
 import { resolveAssetPath } from "./userAssets";
@@ -57,6 +58,10 @@ export async function initTray(win: BrowserWindow, setIsQuitting: (val: boolean)
             label: "Clipes de áudio",
             enabled: process.platform === "win32",
             click: openClipWindow
+        },
+        {
+            label: "Transmissão SeCord",
+            click: openStreamWindow
         },
         {
             label: "Redefinir SeCord",
