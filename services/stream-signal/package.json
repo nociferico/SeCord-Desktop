@@ -8,7 +8,8 @@
     "start": "node server.mjs",
     "test": "node --test",
     "test:ui": "electron ui-smoke.cjs",
-    "test:media": "electron media-smoke.cjs"
+    "test:media": "electron media-smoke.cjs",
+    "test:capture": "electron capture-smoke.cjs"
   },
   "dependencies": { "ws": "^8.21.3" }
 }
