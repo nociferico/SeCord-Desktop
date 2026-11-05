@@ -1,6 +1,6 @@
 {
     "name": "secord-desktop",
-    "version": "0.3.0-beta.3",
+    "version": "0.3.0-beta.4",
     "private": true,
     "description": "SeCord (SoulEater), a separate Discord desktop app with a custom client",
     "keywords": [],

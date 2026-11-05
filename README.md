@@ -4,7 +4,7 @@ SeCord é um aplicativo Windows separado do Discord original. Usa a base aberta 
 
 ## Instalar
 
-O instalador está disponível na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases), quando publicado. Ao compilar localmente, ele fica em `release/SeCord Setup 0.3.0-beta.3.exe`. O arquivo `release/win-unpacked/SeCord.exe` é apenas para teste dentro da pasta completa. O instalador local não tem assinatura digital.
+O instalador está disponível na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases), quando publicado. Ao compilar localmente, ele fica em `release/SeCord Setup 0.3.0-beta.4.exe`. O arquivo `release/win-unpacked/SeCord.exe` é apenas para teste dentro da pasta completa. O instalador local não tem assinatura digital.
 
 ## Extensões e favoritos
 
@@ -16,11 +16,15 @@ A seção recomendada é uma seleção editorial, não um ranking de uso medido.
 
 **ShowHiddenChannels** é opcional. Quando ativo, mostra na lista os canais ocultos cujos dados o Discord entregar ao aplicativo. Clicar abre uma prévia local, com metadados disponíveis e sem mensagens, campo de conversa ou entrada em voz. Canais que o servidor não enviar continuam invisíveis. Não concede permissões do servidor.
 
-O **SpotifyControls** tem uma bússola acima do player. Ao clicar, abre uma busca compacta com três faixas visíveis e rolagem para carregar mais. A busca usa a conta Spotify conectada ao Discord; o player aparece quando há música e dispositivo ativos. Ao escolher uma faixa, o SeCord consulta os dispositivos do Spotify e tenta reproduzi-la no dispositivo ativo. Se não houver dispositivo ativo ou o Spotify recusar o comando, a busca mostra o motivo e oferece um botão para abrir a faixa no Spotify. A reprodução direta exige Spotify Premium. Não foi possível testar a busca com uma conta conectada neste ambiente.
+O **SpotifyControls** tem uma bússola acima do player. Ao clicar, abre uma busca compacta com três faixas visíveis e rolagem para carregar mais. A busca usa a conta Spotify conectada ao Discord; o player aparece quando há música e dispositivo ativos. Ao escolher uma faixa, o SeCord consulta os dispositivos do Spotify e tenta reproduzi-la no dispositivo ativo. Se não houver dispositivo ativo ou o Spotify recusar o comando, a busca mostra o motivo em destaque e oferece um botão para abrir a faixa no Spotify. Nesse caso, é necessário apertar Play no próprio Spotify para ativar um dispositivo. A reprodução direta exige Spotify Premium. Não foi possível testar a busca com uma conta conectada neste ambiente.
 
 ## Tradução de mensagens
 
 A extensão **Translate** agora oferece opções separadas para traduzir automaticamente mensagens enviadas e recebidas. A tradução recebida aparece abaixo do texto original. O idioma de origem pode ficar em **detecção automática**, útil quando a conversa mistura idiomas. A tradução depende da disponibilidade do provedor escolhido e é aplicada às mensagens que o SeCord carregar; não altera o texto salvo no Discord.
+
+## Indicadores de plataforma
+
+A extensão **PlatformIndicators** fica entre as recomendadas e vem ativada e favoritada em instalações novas. Ela mostra ícones de computador, celular, navegador, console/jogo ou realidade virtual na lista de membros, em perfis e nas mensagens quando o Discord fornece o tipo da sessão. Ausência de ícone não prova que a pessoa está offline ou em um dispositivo específico. As opções podem ser desligadas na extensão.
 
 ## Clipes de áudio
 
