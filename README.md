@@ -4,7 +4,11 @@ SeCord é um aplicativo Windows separado do Discord original. Usa a base aberta 
 
 ## Instalar
 
-O instalador está disponível na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases), quando publicado. Ao compilar localmente, ele fica em `release/SeCord Setup 0.3.0-beta.8.exe`. O arquivo `release/win-unpacked/SeCord.exe` é apenas para teste dentro da pasta completa. O instalador local não tem assinatura digital.
+Baixe o instalador na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases). Nesta versão, o arquivo se chama `SeCord - version 11.exe`. O instalador ainda não tem assinatura digital.
+
+## Desempenho
+
+Numa medição curta com os dois aplicativos na tela Amigos, o SeCord usou cerca de 1,22 GB de memória e o Discord original cerca de 1,02 GB. Por enquanto, o SeCord não está mais leve. Os recursos extras ainda cobram memória.
 
 ## Extensões e favoritos
 
@@ -16,7 +20,9 @@ A seção recomendada é uma seleção editorial, não um ranking de uso medido.
 
 **ShowHiddenChannels** é opcional. Quando ativo, mostra na lista os canais ocultos cujos dados o Discord entregar ao aplicativo. Clicar abre uma prévia local, com metadados disponíveis e sem mensagens, campo de conversa ou entrada em voz. Canais que o servidor não enviar continuam invisíveis. Não concede permissões do servidor.
 
-O **SpotifyControls** tem uma bússola acima do player. Ao clicar, abre uma busca compacta com três faixas visíveis e rolagem para carregar mais. A busca usa a conta Spotify conectada ao Discord; o player aparece quando há música e dispositivo ativos. Ao escolher uma faixa, o SeCord consulta os dispositivos do Spotify e tenta reproduzi-la no dispositivo ativo. Se não houver dispositivo ativo ou o Spotify recusar o comando, a busca mostra o motivo em destaque e oferece um botão para abrir a faixa no Spotify. Nesse caso, é necessário apertar Play no próprio Spotify para ativar um dispositivo. A reprodução direta exige Spotify Premium. Não foi possível testar a busca com uma conta conectada neste ambiente.
+O **SpotifyControls** mostra a música em reprodução e mantém os botões de pausar, continuar, avançar, voltar, repetir e embaralhar. A lupa para escolher faixas foi retirada porque a seleção não funcionou de forma confiável nos testes.
+
+As duas telas de carregamento usam a logo do SeCord com movimento discreto. A animação para quando o aplicativo termina de carregar e respeita a preferência de movimento reduzido do sistema.
 
 ## Tradução de mensagens
 

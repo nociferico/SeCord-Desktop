@@ -22,7 +22,7 @@ const CUSTOMIZABLE_ASSETS = ["splash", "tray", "trayUnread"] as const;
 export type UserAssetType = (typeof CUSTOMIZABLE_ASSETS)[number];
 
 const DEFAULT_ASSETS: Record<UserAssetType, string> = {
-    splash: "splash.webp",
+    splash: "secord-loading-logo.png",
     tray: `tray/${process.platform === "darwin" ? "trayTemplate" : "tray"}.png`,
     trayUnread: "tray/trayUnread.png"
 };

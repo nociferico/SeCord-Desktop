@@ -19,6 +19,7 @@
         }
 
         .wrapper {
+            position: relative;
             width: 100%;
             height: 100%;
             box-sizing: border-box;
@@ -27,38 +28,83 @@
             justify-content: center;
             align-items: center;
             border-radius: 8px;
-            border: 1px solid var(--fg-semi-trans);
-            background: var(--bg);
+            border: 1px solid rgb(255 255 255 / 0.08);
+            background: #160e25;
+            color: #eeeaf4;
         }
 
         .message {
-            top: 70%;
+            bottom: 16px;
             word-break: break-word;
             padding: 0 16px;
             position: absolute;
-            font-size: 14px;
+            font-size: 12px;
+            color: #b7aec4;
         }
 
         p {
             text-align: center;
         }
 
-        img {
-            width: 128px;
-            height: 128px;
+        .logo {
+            width: 144px;
+            height: 144px;
             object-fit: contain;
+            animation: logo-enter 450ms ease-out both, logo-breathe 2.6s ease-in-out 450ms infinite;
+        }
+
+        .status {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .dots {
+            display: flex;
+            gap: 5px;
+            margin-top: 13px;
+        }
+
+        .dots span {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #b9a4ed;
+            animation: dot-pulse 1.3s ease-in-out infinite;
+        }
+
+        .dots span:nth-child(2) { animation-delay: 150ms; }
+        .dots span:nth-child(3) { animation-delay: 300ms; }
+
+        @keyframes logo-enter {
+            from { opacity: 0; transform: scale(0.94); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes logo-breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.025); }
+        }
+
+        @keyframes dot-pulse {
+            0%, 100% { opacity: 0.35; transform: scale(0.85); }
+            50% { opacity: 1; transform: scale(1); }
         }
 
         .pixelated img {
             image-rendering: pixelated;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .logo, .dots span { animation: none; }
         }
     </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <img draggable="false" src="vesktop://assets/splash" alt="" role="presentation" />
-        <p>Abrindo SeCord...</p>
+        <img class="logo" draggable="false" src="vesktop://assets/splash" alt="" role="presentation" />
+        <p class="status">Abrindo SeCord...</p>
+        <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="message"></p>
     </div>
 </body>
