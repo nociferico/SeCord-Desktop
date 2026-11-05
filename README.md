@@ -4,7 +4,7 @@ SeCord é um aplicativo Windows separado do Discord original. Usa a base aberta 
 
 ## Instalar
 
-O instalador está disponível na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases), quando publicado. Ao compilar localmente, ele fica em `release/SeCord Setup 0.3.0-beta.1.exe`. O arquivo `release/win-unpacked/SeCord.exe` é apenas para teste dentro da pasta completa. O instalador local não tem assinatura digital.
+O instalador está disponível na página [Releases](https://github.com/nociferico/SeCord-Desktop/releases), quando publicado. Ao compilar localmente, ele fica em `release/SeCord Setup 0.3.0-beta.2.exe`. O arquivo `release/win-unpacked/SeCord.exe` é apenas para teste dentro da pasta completa. O instalador local não tem assinatura digital.
 
 ## Extensões e favoritos
 
@@ -26,7 +26,9 @@ No Windows, abra **Clipes de áudio** nas configurações, no menu da bandeja ou
 
 Abra **Transmissão SeCord** nas configurações, no menu da bandeja ou com `Ctrl+Alt+S`. Escolha a tela ou janela, 480p/720p/1080p, 30/60 fps e se deseja incluir o áudio do computador. Clique em **Iniciar transmissão** e envie o convite para quem vai assistir. A outra pessoa cola o convite na mesma janela do SeCord. O Discord comum não tem um visualizador para esse convite.
 
-A sala usa um servidor pequeno apenas para apresentar transmissor e espectadores. O vídeo e o áudio são enviados diretamente entre os participantes por WebRTC quando a rede permite. É possível testar na mesma máquina iniciando `pnpm --filter secord-stream-signal start` e mantendo `ws://127.0.0.1:8787/signal` no campo **Servidor de conexão**. Para pessoas em outras redes, implante o serviço gratuito pelo [`render.yaml`](render.yaml) e informe o endereço `wss://SEU-SERVICO.onrender.com/signal` no mesmo campo. O plano gratuito pode demorar a acordar após um período sem uso. Até quatro espectadores podem entrar por sala.
+A sala usa um servidor pequeno apenas para apresentar transmissor e espectadores. O vídeo e o áudio são enviados diretamente entre os participantes por WebRTC quando a rede permite. O endereço público `wss://secord-stream-signal-nociferico.onrender.com/signal` já vem preenchido no aplicativo. O plano gratuito pode demorar a acordar após um período sem uso. Até quatro espectadores podem entrar por sala. Para testar sem internet, inicie `pnpm --filter secord-stream-signal start` e use `ws://127.0.0.1:8787/signal` no campo avançado das duas janelas.
+
+Foram testados separadamente a captura real de tela no Electron e o recebimento de vídeo entre duas janelas por WebRTC usando o servidor público. Ainda falta uma prova com duas pessoas em redes diferentes e um teste do áudio transmitido.
 
 Algumas redes exigem um servidor TURN para a mídia passar. Esta versão usa apenas STUN, portanto a conexão remota não é garantida em todas as redes. Qualquer pessoa com o convite e um visualizador compatível pode entrar; o convite não é uma prova de que ela usa uma cópia oficial do SeCord. Não há integração com Go Live, servidor de voz ou permissões do Discord. Avise as pessoas antes de transmitir conteúdo da call.
 

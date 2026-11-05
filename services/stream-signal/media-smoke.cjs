@@ -1,12 +1,14 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
+const { randomBytes } = require("node:crypto");
 const { join } = require("node:path");
 
 async function main() {
+    const remote = process.env.SECORD_SIGNAL_URL;
     const { createSignalServer } = await import("./server.mjs");
-    const signal = createSignalServer({ port: 0 });
-    const address = await signal.listen();
-    const url = `ws://127.0.0.1:${address.port}/signal`;
-    const room = "0123456789abcdef0123456789abcdef";
+    const signal = remote ? null : createSignalServer({ port: 0 });
+    const address = signal ? await signal.listen() : null;
+    const url = remote || `ws://127.0.0.1:${address.port}/signal`;
+    const room = randomBytes(16).toString("hex");
     const root = join(__dirname, "..", "..");
 
     const host = new BrowserWindow({ show: false, webPreferences: { backgroundThrottling: false } });
@@ -71,7 +73,7 @@ async function main() {
     console.log(JSON.stringify(result));
     viewer.close();
     host.close();
-    await signal.close();
+    await signal?.close();
     app.quit();
 }
 

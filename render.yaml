@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: secord-stream-signal
+    name: secord-stream-signal-nociferico
     runtime: node
     plan: free
     buildCommand: pnpm --filter secord-stream-signal install --prod --frozen-lockfile

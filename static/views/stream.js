@@ -262,5 +262,6 @@ elements.copy.addEventListener("click", async () => {
     catch (error) { status(error.message); }
 });
 window.addEventListener("beforeunload", () => stopSession());
-elements.server.value = localStorage.getItem("secord-stream-server") || elements.server.value;
+const savedServer = localStorage.getItem("secord-stream-server");
+if (savedServer && savedServer !== "ws://127.0.0.1:8787/signal") elements.server.value = savedServer;
 refreshSources();
